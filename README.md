@@ -1,1 +1,3 @@
 # Pokedex
+
+Una practica sencilla

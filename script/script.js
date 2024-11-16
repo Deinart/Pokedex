@@ -220,7 +220,7 @@ document.getElementById('screen-dex').appendChild(containerDex1);
 pokemones.forEach(pokemon => {
   const pokemonDiv = document.createElement('div');
 
-  pokemonDiv.classList.add('pokemon');
+  pokemonDiv.classList.add('pokemon-card');
 
   pokemonDiv.innerHTML = `
     <div class="container-img">

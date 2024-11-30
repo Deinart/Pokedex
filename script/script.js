@@ -29,15 +29,19 @@ const pokemons = fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=62')
   })
 .catch((error) => console.log(error));
 
+// container section for the pokemon list
 const containerDex1 = document.createElement('section');
 containerDex1.setAttribute('id', 'container-primary');
 document.getElementById('screen-dex').appendChild(containerDex1);
+// pokemon information container
 const containerDex2 = document.createElement('section');
 containerDex2.setAttribute('id', 'container-secondary');
 document.getElementById('screen-dex').appendChild(containerDex2);
 
+// show all the pokemonList
 pokemons.then((pokemonList) => {
   pokemonList.forEach((pokemon) => {
+    // generates a card for each pokemon
     const pokemonCard = document.createElement('div');
     pokemonCard.setAttribute('id', 'pokemon-card');
     
@@ -50,46 +54,38 @@ pokemons.then((pokemonList) => {
       <h3>${pokemon.name}</h3>
     </div>
     `;
-    
     containerDex1.appendChild(pokemonCard);
+
+    // 
     pokemonCard.addEventListener('click',() => {
       const infoCard = document.createElement('div');
       infoCard.setAttribute('id', 'info-card');
-
+      
       infoCard.innerHTML = `
-      <div class="info-card">
-        <div><img src="${pokemon.sprite}" alt="${pokemon.name}"/></div>
-        <h2>${pokemon.name}</h2>
-        <p>${pokemon.number}</p>
+      <div>
+        <img src="${pokemon.sprite}" alt="${pokemon.name}"/>
       </div>
-      `
-
+      <h2>${pokemon.name}</h2>
+      <p>${pokemon.number}</p>
+      <button id="btn-close-card">X</button>
+      `;
+         
       containerDex2.style = `
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 100%;
-        height: 100%;
-        background-color: #00000030;`
-
-        containerDex2.appendChild(infoCard);
-
-        containerDex2.addEventListener('click', () => {
-          containerDex2.removeChild(infoCard);
-          containerDex2.style = '';
-        });
+        height: 99%;
+        `;
+      containerDex2.appendChild(infoCard);
+      const btnCloseCard = infoCard.querySelector('#btn-close-card');
+      btnCloseCard.addEventListener('click', () => {
+        containerDex2.removeChild(infoCard);
+        containerDex2.style = '';
+      });
     });
-
-
   });
 });
-
-  
-  
 
 

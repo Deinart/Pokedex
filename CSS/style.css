@@ -112,14 +112,29 @@ body {
     flex-wrap: wrap;
 }
 
-
-.info-card {
-    width: 400px;
-    height: 600px;
-    background-color: #fff;
-    border: 5px solid red;
+#container-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+#info-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border: 5px solid red;
+
+}
+
+#btn-close-card{
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+}
 
 
 }

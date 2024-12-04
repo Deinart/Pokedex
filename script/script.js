@@ -1,4 +1,4 @@
-const pokemons = fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151')
+const pokemons = fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=45')
   .then((response) => response.json())
   .then((data) => {
     const pokeData = data.results.map((pokemon) => {
@@ -91,7 +91,7 @@ pokemons.then((pokemonList) => {
         transform: translate(-50%, -50%);
         width: 100%;
         height: 101%;
-        `;
+      `;
 
       containerDex2.appendChild(infoCard);
 

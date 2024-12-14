@@ -29,34 +29,11 @@ const pokemons = fetch('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=45')
   })
 .catch((error) => console.log(error));
 
-// container section for the pokemon list
-const containerDex1 = document.createElement('section');
-containerDex1.setAttribute('id', 'container-primary');
-document.getElementById('screen-dex').appendChild(containerDex1);
-
-// pokemon information container
-const containerDex2 = document.createElement('section');
-containerDex2.setAttribute('id', 'container-secondary');
-document.getElementById('screen-dex').appendChild(containerDex2);
-
-// 
-const inputSearch = document.getElementById('search-pokemon');
-
-inputSearch.addEventListener('keyup', (pokeName) => {
-  if (pokeName.target.matches('#search-pokemon')) {
-    document.querySelectorAll('#pokemon-card').forEach(pokemon => {
-      pokemon.textContent.toLowerCase().includes(pokeName.target.value)
-      ? pokemon.classList.remove('active')
-      : pokemon.classList.add('active');
-    })
-  } 
-})
-
 // show all the pokemonList
 pokemons.then((pokemonList) => {
+  // generates a card for each pokemon
   pokemonList.forEach((pokemon) => {
-    // generates a card for each pokemon
-    const pokemonCard = document.createElement('div');
+    let pokemonCard = document.createElement('div');
     pokemonCard.setAttribute('id', 'pokemon-card');
     
     pokemonCard.innerHTML = `
@@ -65,21 +42,19 @@ pokemons.then((pokemonList) => {
     </div>
     <div class="container-ball"></div>
     <div class="container-name">
-      <h3>${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h3>
+      <h3 id="poke-name">${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}</h3>
     </div>
     `;
     containerDex1.appendChild(pokemonCard);
 
     //  show the infoCard
-    pokemonCard.addEventListener('click',() => {
-      const infoCard = document.createElement('div');
-      infoCard.setAttribute('id', 'info-card');
-      
+    pokemonCard.addEventListener('click', (e) => {
+      document.body.style = `overflow: hidden;`
       infoCard.innerHTML = `
       <div>
         <img src="${pokemon.sprite}" alt="${pokemon.name}"/>
       </div>
-      <h2>${pokemon.name}</h2>
+      <h2>${pokemon.name[0].toUpperCase() + pokemon.name.slice(1)}</h2>
       <p>${pokemon.number}</p>
       <button id="btn-close-card">X</button>
       `;
@@ -90,7 +65,7 @@ pokemons.then((pokemonList) => {
         left: 50%;
         transform: translate(-50%, -50%);
         width: 100%;
-        height: 101%;
+        height: 100%;
       `;
 
       containerDex2.appendChild(infoCard);
@@ -100,9 +75,43 @@ pokemons.then((pokemonList) => {
       btnCloseCard.addEventListener('click', () => {
         containerDex2.removeChild(infoCard);
         containerDex2.style = '';
+        document.body.style = '';
       });
     });
   });
+
 });
 
+// container section for the pokemon list
+const containerDex1 = document.createElement('section');
+containerDex1.setAttribute('id', 'container-primary');
+document.getElementById('screen-dex').appendChild(containerDex1);
+  
+// pokemon information container
+const containerDex2 = document.createElement('section');
+containerDex2.setAttribute('id', 'container-secondary');
+document.getElementById('screen-dex').appendChild(containerDex2);
+    
+// infoCard element container
+const infoCard = document.createElement('div');
+infoCard.setAttribute('id', 'info-card');
+
+
+//? the input search for pokemons
+window.addEventListener('load', ()=> {
+  const inputSearch = document.getElementById('search-pokemon');
+
+  inputSearch.addEventListener('keyup', () => {
+    const pokeNames = containerDex1.querySelectorAll('#poke-name');
+    const callPoke = inputSearch.value.toLowerCase(); 
+    
+    Array.from(pokeNames).forEach((pokemon) => {
+      if (pokemon.textContent.toLowerCase().includes(callPoke)) {
+        pokemon.style.display = 'flex';
+      } else {
+        pokemon.style.display = 'none';
+      }
+    })
+  });
+})
 

@@ -8,7 +8,7 @@ export default function BoxInformation() {
 
   return (
     <div 
-      className={`absolute ${context.isPokeInfoOpen ? 'flex' : 'hidden'} flex-col items-center w-full h-full z-20 bg-[#D9D9D9]`} 
+      className={`absolute ${context.isPokeInfoOpen ? 'flex' : 'hidden'} flex-col items-center w-full h-screen z-20 bg-[#D9D9D9]`} 
     >
       <div className='flex items-center justify-center w-full h-55 bg-[#222224]'>
         <img

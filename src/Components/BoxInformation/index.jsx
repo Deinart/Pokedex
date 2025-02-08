@@ -9,7 +9,6 @@ export default function BoxInformation() {
   return (
     <div 
       className={`absolute ${context.isPokeInfoOpen ? 'flex' : 'hidden'} flex-col items-center w-full h-full z-20 bg-[#D9D9D9]`} 
-      onClick={() => context.closePokeInformation()}
     >
       <div className='flex items-center justify-center w-full h-55 bg-[#222224]'>
         <img
@@ -22,9 +21,12 @@ export default function BoxInformation() {
           {context.dataPokemon.name}
         </h2>
       </div>
-      <div className='absolute top-0'>
+      <div 
+        className='flex items-center justify-center absolute bottom-6 right-6 size-15 bg-[#f0eded] active:bg-[#e72b2b] active:text-white rounded-full'
+        onClick={() => context.closePokeInformation()}
+      >
         <XMarkIcon
-          className=''
+          className='size-11'
         />
       </div>
     </div>

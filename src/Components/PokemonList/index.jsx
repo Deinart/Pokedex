@@ -19,7 +19,6 @@ export function PokemonList () {
           <p className='text-[#FF9D00] flex font-mono font-bold text-md'>
             {
               context.filteredPokemons ? context.filteredPokemons.length : context.pokeInformation.length
-              // context.pokeInformation.length
             }
           </p>
         </div>

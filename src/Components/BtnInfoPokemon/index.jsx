@@ -7,6 +7,9 @@ export default function BtnInfoPokemon (data) {
   function sendDataPoke(data) {
     setTimeout(() => context.openPokeInformation(), 400)
     context.setDataPokemon(data)
+    context.setNamePokemon(data.name[0].toUpperCase() + data.name.slice(1))
+    context.setTypesPokemon(data.types)
+    
   }
 
   return(

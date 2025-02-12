@@ -14,6 +14,12 @@ export const CodeProvider = ({ children }) => {
   // Information about the selected pokemon
   const [dataPokemon, setDataPokemon] = useState([])
 
+  // Pokemon Name
+  const [namePokemon, setNamePokemon] = useState(null)
+
+  // Pokemons Types
+  const [typesPokemon, setTypesPokemon] = useState([])
+
   // Get pokemon
   const [filteredPokemons, setFilteredPokemons] = useState(null)
 
@@ -45,7 +51,7 @@ export const CodeProvider = ({ children }) => {
                   icon: data.sprites.versions['generation-viii'].icons.front_default,
                   sprite: data.sprites.front_default,
                   img_pokemon: data.sprites.other.dream_world.front_default,
-                  type: data.types.map((type) => type.type.name),
+                  types: data.types.map((type) => type.type.name),
                   abilities: data.abilities.map((ability) => ability.ability.name),
                   height: data.height,
                   weight: data.weight,
@@ -61,6 +67,12 @@ export const CodeProvider = ({ children }) => {
     }, 1000)
   }, [])
 
+  // useEffect(() => {
+    // pokeInformation.map(data => console.log(data.types))
+  // }, [dataPokemon])
+  
+  
+  
   const filteredPokemonsByName = (pokemons, searchByTitle) => {
   return pokemons?.filter(pokemon => pokemon.name.toLowerCase().includes(searchByTitle.toLowerCase()))
   }
@@ -85,6 +97,10 @@ export const CodeProvider = ({ children }) => {
         pokeNameSearch,
         setPokeNameSearch,
         filteredPokemons,
+        namePokemon,
+        setNamePokemon,
+        typesPokemon,
+        setTypesPokemon,
       }} 
     >
       { children }
